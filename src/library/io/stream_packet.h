@@ -21,7 +21,7 @@ namespace maniscalco::io
             if constexpr (S == stream_direction::forward)
                 return (endOffset_ - startOffset_);
             else
-                return (endOffset_ - startOffset_);
+                return (startOffset_ - endOffset_);
         }
         auto data() const{return buffer_.data();}
         auto capacity() const{return buffer_.capacity();}
