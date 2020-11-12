@@ -7,14 +7,14 @@
 #include <functional>
 
 
-namespace maniscalco 
+namespace maniscalco
 {
 
     class buffer final 
     {
     public:
 
-        using size_type = std::size_t;
+        using size_type = std::int64_t;
         using element_type = std::uint8_t;
         using iterator = element_type *;
         using const_iterator = element_type const *;

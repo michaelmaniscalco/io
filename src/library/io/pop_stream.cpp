@@ -2,44 +2,21 @@
 
 
 //=============================================================================
-maniscalco::io::pop_stream::pop_stream
+template <maniscalco::io::stream_direction S>
+maniscalco::io::pop_stream<S>::pop_stream
 (
     configuration_type const & configuration
 ): 
-    inputHandler_(configuration.inputHandler_), 
-    buffer_(), 
-    size_(0), 
-    readPosition_(0)
+    inputHandler_(configuration.inputHandler_)
 {
 }
+
 
 
 //=============================================================================
-maniscalco::io::pop_stream::pop_stream
-(
-    pop_stream && other
-): 
-    inputHandler_(std::move(other.inputHandler_)),
-    buffer_(std::move(other.buffer_)),
-    size_(other.size_),
-    readPosition_(other.readPosition_)
+namespace maniscalco::io
 {
-    other.inputHandler_ = nullptr;
-    other.buffer_ = buffer();
-}
+    template class pop_stream<stream_direction::forward>;
+    template class pop_stream<stream_direction::reverse>;
 
-
-//=============================================================================
-auto maniscalco::io::pop_stream::operator =
-(
-    pop_stream && other
-) -> pop_stream &
-{
-    inputHandler_ = std::move(other.inputHandler_);
-    buffer_ = std::move(other.buffer_);
-    size_ = other.size_;
-    readPosition_ = other.readPosition_;
-    other.inputHandler_ = nullptr;
-    other.buffer_ = buffer();
-    return *this;
-}
+} // maniscalco

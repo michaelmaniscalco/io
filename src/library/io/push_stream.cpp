@@ -2,58 +2,44 @@
 
 
 //=============================================================================
-maniscalco::io::push_stream::push_stream
+template <>
+maniscalco::io::forward_push_stream::push_stream
 (
     configuration_type const & configuration
 ): 
-    bufferAllocationHandler_(configuration.bufferAllocationHandler_),
-    buffer_(bufferAllocationHandler_ ? bufferAllocationHandler_() : buffer(default_buffer_size)),
+    bufferAllocationHandler_(configuration.bufferAllocationHandler_ ? configuration.bufferAllocationHandler_ : 
+            [](){return buffer(default_buffer_size);}),
+    buffer_(bufferAllocationHandler_()),
     writePosition_(buffer_.begin()),
     bufferOutputHandler_(configuration.bufferOutputHandler_),
-    size_(0)
+    size_(0),
+    internalSize_(0),
+    internalBuffer_{0,0}
 {
 }
 
 
 //=============================================================================
-maniscalco::io::push_stream::push_stream
+template <>
+maniscalco::io::reverse_push_stream::push_stream
 (
-    push_stream && other
+    configuration_type const & configuration
 ): 
-    bufferAllocationHandler_(std::move(other.bufferAllocationHandler_)),
-    buffer_(std::move(other.buffer_)),
-    writePosition_(other.writePosition_),
-    bufferOutputHandler_(std::move(other.bufferOutputHandler_)),
-    size_(other.size_)
+    bufferAllocationHandler_(configuration.bufferAllocationHandler_ ? configuration.bufferAllocationHandler_ : 
+            [](){return buffer(default_buffer_size);}),
+    buffer_(bufferAllocationHandler_()),
+    writePosition_(buffer_.end()),
+    bufferOutputHandler_(configuration.bufferOutputHandler_),
+    size_(0),
+    internalSize_(0),
+    internalBuffer_{0,0}
 {
-    other.bufferAllocationHandler_ = nullptr;
-    other.buffer_ = buffer();
-    other.bufferOutputHandler_ = nullptr;
-    other.size_ = 0;
 }
 
 
 //=============================================================================
-auto maniscalco::io::push_stream::operator =
-(
-    push_stream && other
-) -> push_stream &
-{
-    bufferAllocationHandler_ = std::move(other.bufferAllocationHandler_);
-    buffer_ = std::move(other.buffer_);
-    writePosition_ = other.writePosition_;
-    bufferOutputHandler_ = std::move(other.bufferOutputHandler_);
-    size_ = other.size_;
-    other.bufferAllocationHandler_ = nullptr;
-    other.buffer_ = buffer();
-    other.bufferOutputHandler_ = nullptr;
-    other.size_ = 0;
-    return *this;
-}
-
-
-//=============================================================================
-maniscalco::io::push_stream::~push_stream
+template <maniscalco::io::stream_direction S>
+maniscalco::io::push_stream<S>::~push_stream
 (
 )
 {
@@ -62,9 +48,29 @@ maniscalco::io::push_stream::~push_stream
 
 
 //=============================================================================
-auto maniscalco::io::push_stream::size
+template <>
+auto maniscalco::io::forward_push_stream::size
 (
 ) const -> size_type
 {
     return (size_ + ((writePosition_ - buffer_.begin()) * bits_per_byte) + internalSize_);
 }
+
+
+//=============================================================================
+template <>
+auto maniscalco::io::reverse_push_stream::size
+(
+) const -> size_type
+{
+    return (size_ + ((buffer_.end() - writePosition_) * bits_per_byte) + internalSize_);
+}
+
+
+//=============================================================================
+namespace maniscalco::io
+{
+    template class push_stream<stream_direction::forward>;
+    template class push_stream<stream_direction::reverse>;
+
+} // maniscalco
