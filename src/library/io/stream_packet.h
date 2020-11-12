@@ -16,9 +16,15 @@ namespace maniscalco::io
         stream_packet(buffer && b, size_type start, size_type end):buffer_(std::move(b)), startOffset_(start), endOffset_(end){}
         stream_packet(stream_packet &&) = default;
 
-        size_type size() const{return (endOffset_ - startOffset_);}
+        auto size() const
+        {
+            if constexpr (S == stream_direction::forward)
+                return (endOffset_ - startOffset_);
+            else
+                return (endOffset_ - startOffset_);
+        }
         auto data() const{return buffer_.data();}
-        
+        auto capacity() const{return buffer_.capacity();}
         using opposite_direction_packet = stream_packet<opposite_direction<S>::value>;
         stream_packet(opposite_direction_packet && other):buffer_(std::move(other.buffer_)), startOffset_(other.endOffset_), endOffset_(other.startOffset_){}
 
