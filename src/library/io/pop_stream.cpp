@@ -2,7 +2,7 @@
 
 
 //=============================================================================
-maniscalco::pop_stream::pop_stream
+maniscalco::io::pop_stream::pop_stream
 (
     configuration_type const & configuration
 ): 
@@ -15,7 +15,7 @@ maniscalco::pop_stream::pop_stream
 
 
 //=============================================================================
-maniscalco::pop_stream::pop_stream
+maniscalco::io::pop_stream::pop_stream
 (
     pop_stream && other
 ): 
@@ -30,7 +30,7 @@ maniscalco::pop_stream::pop_stream
 
 
 //=============================================================================
-auto maniscalco::pop_stream::operator =
+auto maniscalco::io::pop_stream::operator =
 (
     pop_stream && other
 ) -> pop_stream &

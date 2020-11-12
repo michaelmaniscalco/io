@@ -8,7 +8,7 @@
 #include <tuple>
 
 
-namespace maniscalco 
+namespace maniscalco::io
 {
 
     class pop_stream final 
@@ -79,7 +79,7 @@ namespace maniscalco
 
 
 //=============================================================================
-inline void maniscalco::pop_stream::load_input_buffer
+inline void maniscalco::io::pop_stream::load_input_buffer
 (
 )
 {
@@ -91,7 +91,7 @@ inline void maniscalco::pop_stream::load_input_buffer
 
 
 //=============================================================================
-inline void maniscalco::pop_stream::discard
+inline void maniscalco::io::pop_stream::discard
 (
     size_type count
 )
@@ -110,7 +110,7 @@ inline void maniscalco::pop_stream::discard
 
 
 //=============================================================================
-inline auto maniscalco::pop_stream::pop_bit
+inline auto maniscalco::io::pop_stream::pop_bit
 (
 ) -> code_type
 {
@@ -123,7 +123,7 @@ inline auto maniscalco::pop_stream::pop_bit
 
 
 //=============================================================================
-inline auto maniscalco::pop_stream::pop
+inline auto maniscalco::io::pop_stream::pop
 (
     size_type code_length
 ) -> code_type
@@ -150,7 +150,7 @@ inline auto maniscalco::pop_stream::pop
 
 
 //=============================================================================
-inline auto maniscalco::pop_stream::pop
+inline auto maniscalco::io::pop_stream::pop
 (
     size_type where, 
     size_type codeSize
@@ -164,7 +164,7 @@ inline auto maniscalco::pop_stream::pop
 
 
 //=============================================================================
-inline auto maniscalco::pop_stream::peek
+inline auto maniscalco::io::pop_stream::peek
 (
     size_type codeSize
 ) const -> std::optional<code_type>

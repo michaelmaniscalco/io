@@ -8,7 +8,7 @@
 #include <memory>
 #include <vector>
 
-namespace maniscalco 
+namespace maniscalco::io 
 {
 
     class push_stream final 
@@ -78,7 +78,7 @@ namespace maniscalco
 
 
 //=============================================================================
-inline void maniscalco::push_stream::flush
+inline void maniscalco::io::push_stream::flush
 (
 )
 {
@@ -87,7 +87,7 @@ inline void maniscalco::push_stream::flush
 
 
 //=============================================================================
-inline void maniscalco::push_stream::flush_current_buffer
+inline void maniscalco::io::push_stream::flush_current_buffer
 (
 )
 {
@@ -112,7 +112,7 @@ inline void maniscalco::push_stream::flush_current_buffer
 
 
 //=============================================================================
-inline void maniscalco::push_stream::push
+inline void maniscalco::io::push_stream::push
 (
     // max codeSize = 32
     code_type code, 

@@ -2,7 +2,7 @@
 
 
 //=============================================================================
-maniscalco::push_stream::push_stream
+maniscalco::io::push_stream::push_stream
 (
     configuration_type const & configuration
 ): 
@@ -16,7 +16,7 @@ maniscalco::push_stream::push_stream
 
 
 //=============================================================================
-maniscalco::push_stream::push_stream
+maniscalco::io::push_stream::push_stream
 (
     push_stream && other
 ): 
@@ -34,7 +34,7 @@ maniscalco::push_stream::push_stream
 
 
 //=============================================================================
-auto maniscalco::push_stream::operator =
+auto maniscalco::io::push_stream::operator =
 (
     push_stream && other
 ) -> push_stream &
@@ -53,7 +53,7 @@ auto maniscalco::push_stream::operator =
 
 
 //=============================================================================
-maniscalco::push_stream::~push_stream
+maniscalco::io::push_stream::~push_stream
 (
 )
 {
@@ -62,7 +62,7 @@ maniscalco::push_stream::~push_stream
 
 
 //=============================================================================
-auto maniscalco::push_stream::size
+auto maniscalco::io::push_stream::size
 (
 ) const -> size_type
 {

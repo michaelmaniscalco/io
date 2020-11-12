@@ -34,7 +34,7 @@ auto stream_push_pop_test
 {
     using namespace maniscalco;
 
-    push_stream pushStream({outputHandler,
+    io::push_stream pushStream({outputHandler,
             customAllocationHandler});
     auto push_start = std::chrono::system_clock::now();
     // run test - push 0 to num_integers_to_push into the stream
@@ -45,7 +45,7 @@ auto stream_push_pop_test
 
     // vaildate - pop those numbers from the stream
     auto success = true;
-    pop_stream popStream({inputHandler});
+    io::pop_stream popStream({inputHandler});
     auto pop_start = std::chrono::system_clock::now();
     auto i = 0ull;
     for (; ((success) && (i < num_integers_to_push)); ++i)
