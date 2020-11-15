@@ -3,8 +3,6 @@
 #include "./buffer.h"
 #include "./stream_direction.h"
 
-#include <iostream>
-
 
 namespace maniscalco::io
 {
@@ -26,8 +24,6 @@ namespace maniscalco::io
             startOffset_(start), 
             endOffset_(end)
         {
-            int y = 9;
-            std::cout << "packet begin = " << start << ", end = " << end << std::endl;
         }
 
         stream_packet(stream_packet &&) = default;
@@ -52,7 +48,6 @@ namespace maniscalco::io
             startOffset_(other.endOffset_), 
             endOffset_(other.startOffset_)
         {
-            int y = 9;
         }
 
         buffer      buffer_;
