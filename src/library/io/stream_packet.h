@@ -3,6 +3,8 @@
 #include "./buffer.h"
 #include "./stream_direction.h"
 
+#include <iostream>
+
 
 namespace maniscalco::io
 {
@@ -13,7 +15,21 @@ namespace maniscalco::io
     	using size_type = std::int64_t;
 
         stream_packet() = default;
-        stream_packet(buffer && b, size_type start, size_type end):buffer_(std::move(b)), startOffset_(start), endOffset_(end){}
+        
+        stream_packet
+        (
+            buffer && b, 
+            size_type start, 
+            size_type end
+        ):
+            buffer_(std::move(b)), 
+            startOffset_(start), 
+            endOffset_(end)
+        {
+            int y = 9;
+            std::cout << "packet begin = " << start << ", end = " << end << std::endl;
+        }
+
         stream_packet(stream_packet &&) = default;
 
         auto size() const
@@ -23,10 +39,21 @@ namespace maniscalco::io
             else
                 return (startOffset_ - endOffset_);
         }
+
         auto data() const{return buffer_.data();}
         auto capacity() const{return buffer_.capacity();}
         using opposite_direction_packet = stream_packet<opposite_direction<S>::value>;
-        stream_packet(opposite_direction_packet && other):buffer_(std::move(other.buffer_)), startOffset_(other.endOffset_), endOffset_(other.startOffset_){}
+
+        stream_packet
+        (
+            opposite_direction_packet && other
+        ):
+            buffer_(std::move(other.buffer_)), 
+            startOffset_(other.endOffset_), 
+            endOffset_(other.startOffset_)
+        {
+            int y = 9;
+        }
 
         buffer      buffer_;
         size_type   startOffset_;
