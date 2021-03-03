@@ -4,6 +4,10 @@ add_library(io
     buffer.cpp
 )
 
+
+target_link_libraries(io
+    common)
+
 target_include_directories(io
     PUBLIC
         $<BUILD_INTERFACE:${_io_include_dir}>

@@ -1,1 +1,0 @@
-/usr/bin/c++  -O3 -DNDEBUG   CMakeFiles/io_demo.dir/main.cpp.o  -o ../../../bin/io_demo  ../../../lib/libio.a 

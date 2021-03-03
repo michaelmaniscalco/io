@@ -1,2 +1,0 @@
-/usr/bin/ar qc ../../../lib/libio.a  CMakeFiles/io.dir/push_stream.cpp.o CMakeFiles/io.dir/pop_stream.cpp.o CMakeFiles/io.dir/buffer.cpp.o
-/usr/bin/ranlib ../../../lib/libio.a
