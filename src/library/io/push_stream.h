@@ -164,7 +164,7 @@ inline void maniscalco::io::forward_push_stream::push
 )
 {
     code <<= (64 - codeSize - internalSize_);
-    code = endian_swap<host_order_type, network_order_type>(code);
+    code = endian_swap<std::endian::native, std::endian::big>(code);
     *(std::size_t *)(internalBuffer_) |= code;
     internalSize_ += codeSize;
     if (internalSize_ >= 32)
@@ -198,7 +198,7 @@ inline void maniscalco::io::reverse_push_stream::push
 )
 {
     code <<= internalSize_;
-    code = endian_swap<host_order_type, network_order_type>(code);
+    code = endian_swap<std::endian::native, std::endian::big>(code);
     *(std::size_t *)(internalBuffer_) |= code;
     if ((internalSize_ += codeSize) >= 32)
     {

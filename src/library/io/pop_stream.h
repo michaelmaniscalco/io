@@ -217,7 +217,7 @@ inline auto maniscalco::io::pop_stream<S>::pop
 ) const -> code_type
 {
     auto code = *(std::size_t *)(buffer_.data() + (where >> 0x03));
-    code = endian_swap<network_order_type, host_order_type>(code);
+    code = endian_swap<std::endian::big, std::endian::native>(code);
     code >>= ((sizeof(std::size_t) << 3) - codeSize - (where & 0x07));
     return (code & ((1ull << codeSize) - 1));
 }
