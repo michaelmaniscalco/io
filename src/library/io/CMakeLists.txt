@@ -13,5 +13,3 @@ target_include_directories(io
         $<BUILD_INTERFACE:${_io_include_dir}>
         $<INSTALL_INTERFACE:include/io>
 )
-
-target_compile_features(io PUBLIC cxx_std_17)
